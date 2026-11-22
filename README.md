@@ -133,7 +133,7 @@ No unrealistic promises.
 
 No pressure to ship.
 
-Just a personal experiment to see how much open-world chaos can be created with some JavaScript, 3D assets, and too much free time.
+Just a personal experiment to see how much open-world chaos can be created with some JavaScript, 3D assets, and PASSION FOR making a funny game.
 
 **Welcome to Suramadu City.**
 

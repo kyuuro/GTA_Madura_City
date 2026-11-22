@@ -1,0 +1,57 @@
+bbox game x -1883..-343 z 2275..3782
+ROADS (n, panjang unit game, km asli):
+  residential 744 31538 94.6
+  tertiary 106 6194 18.6
+  primary 112 5931 17.8
+  trunk 101 5596 16.8
+  secondary 74 3666 11.0
+  unclassified 6 500 1.5
+JALAN UTAMA (nama, kelas, panjang unit):
+  Jalan Raya Diponegoro trunk 1573
+  Jalan Raya Darmo primary 1339
+  Jalan Jagir Wonokromo primary 1115
+  Jalan Ngagel trunk 1052
+  Jalan Gunung Sari primary 897
+  Jalan Dokter Soetomo secondary 738
+  Jalan Wonokromo trunk 686
+  Jalan Pulo Wonokromo secondary 594
+  Jalan Jenderal Ahmad Yani trunk 535
+  Jalan Darmo Kali secondary 505
+  Jalan Bendul Merisi tertiary 492
+  Jalan R.A. Kartini tertiary 483
+  Jalan Kutai primary 455
+  Jalan Ngagel Jaya Selatan primary 425
+  Jalan Hayam Wuruk tertiary 420
+  Jalan Stasiun Wonokromo trunk 420
+  Jalan Indragiri tertiary 413
+  Jalan Mayjend Sungkono primary 354
+  Jalan Bengawan primary 351
+  Jalan Dinoyo secondary 349
+  Jalan Wage Rudolf Supratman tertiary 342
+  Jalan Ketintang tertiary 342
+  Jalan Adityawarman primary 332
+  Jalan Brawijaya tertiary 328
+  Jalan Ketintang Madya tertiary 322
+  Jalan Layang Wonokromo trunk 311
+  Jalan Joyoboyo primary 298
+  Jalan Jenderal Achmad Yani trunk 294
+  Jalan Raya Darmo trunk 294
+  Jalan Ngagel Rejo Kidul secondary 287
+  Jalan Bung Tomo primary 279
+  Jalan Moehammad Jasin Polisi Istimewa secondary 271
+  Jalan Ciliwung secondary 249
+BANGUNAN: 469 {'yes': 98, 'school': 74, 'hospital': 42, 'mosque': 39, 'bank': 37, 'government_office': 23, 'park': 20, 'kindergarten': 19, 'clinic': 14, 'church': 14, 'college': 14, 'village_office': 14} luas total m2 359801
+TAMAN: [('Taman Bungkul', 'park', -1116, 2841, 15556), (None, 'park', -836, 2374, 63), ('GOR Pancasila', 'sports_hall', -1439, 2685, 2886), ('Gool Futsal', 'pitch', -934, 3253, 1694), (None, 'park', -1213, 2820, 450), (None, 'park', -1213, 2831, 304), (None, 'garden', -1082, 2591, 451), (None, 'garden', -1077, 2573, 57), (None, 'garden', -1085, 2562, 1082), (None, 'garden', -1077, 2563, 286), (None, 'garden', -1086, 2572, 335), (None, 'park', -1449, 3043, 5046)]
+  Darmo Trade Center yes -1189 3239 11028
+  Royal Plaza yes -1321 3488 21369
+  Taman Bungkul park -1116 2841 15556
+  Polsek Wonokromo police -1216 3109 1268
+  Stasiun Wonokromo train_station -1147 3226 1501
+  Giant Extra supermarket -1544 2373 8364
+  Transmart Ngagel mall -977 2836 10944
+  Marvell City Mall yes -888 2759 9828
+  Rumah Sakit Surabaya Medical Center hospital -1063 2751 913
+  Pasar Dinoyo Tangsi marketplace -998 2656 361
+  Dinas Perhubungan UPTD Terminal Joyoboyo government_office -1219 3124 994
+  Pasar Wonokitri marketplace -1640 2958 1244
+  Terminal Intermoda Joyoboyo transportation -1245 3118 6411

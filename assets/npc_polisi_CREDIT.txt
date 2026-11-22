@@ -1,0 +1,9 @@
+"Indonesian Police Dalmas" (https://skfb.ly/pDCwr) by mixboni
+is licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)
+http://creativecommons.org/licenses/by/4.0/
+
+Changes made to the original: mesh simplified (555k -> 9k triangles), new UV layout and
+re-baked 1024px texture, added a skeleton and Idle/Run animations (the original is a static mesh),
+re-centered and rescaled, shield bound to the left arm. See tools/prep_polisi.py.
+assets/npc_polisi.glb is therefore an adaptation and is also shared under CC BY 4.0.
+The creator does not endorse this game.

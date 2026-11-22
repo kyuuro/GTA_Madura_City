@@ -1,0 +1,15 @@
+All three models were downloaded from Sketchfab and are licensed under Creative Commons Attribution 4.0 (CC BY 4.0), http://creativecommons.org/licenses/by/4.0/
+
+"Old house with rusty roof 3d model free" by iGauravRajput
+https://sketchfab.com/3d-models/old-house-with-rusty-roof-3d-model-free-d3fc5d0de4964c2986dac7a5a8a44d83
+Changes: simplified 137k -> 3k triangles, texture baked to vertex colors, rescaled. See tools/prep_houses.py. -> rusty.glb
+
+"[old] Indonesian Simple House" by sakit.jawa
+https://sketchfab.com/3d-models/old-indonesian-simple-house-ec295239d58d46cabedcce1607bf8135
+Changes: node transforms baked, rotated, rescaled, texture resized to 512x256 JPEG. -> indo.glb
+
+"Abadoned Building | Lowpoly" by Frid.blend
+https://sketchfab.com/3d-models/abadoned-building-lowpoly-3b2e12886d00454e8d93e9a4d9419194
+Changes: simplified 14.8k -> 3.4k triangles, textures baked to vertex colors, rotated 180 deg. -> abandoned.glb
+
+rusty.glb, indo.glb and abandoned.glb are adaptations and are also shared under CC BY 4.0. The creators do not endorse this game.

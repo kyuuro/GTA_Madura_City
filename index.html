@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GTA: Gak Tau Aturan - Suramadu City</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;background:#1a1410;font-family:Impact,"Arial Black",sans-serif}
+  canvas{display:block}
+  #hud{position:fixed;left:12px;top:10px;color:#ffe9a8;text-shadow:0 2px 0 #000;font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;pointer-events:none;white-space:pre}
+  #title{position:fixed;right:14px;bottom:10px;color:#ff7a1a;font-size:22px;letter-spacing:1px;text-shadow:0 2px 0 #000;text-align:right;pointer-events:none}
+  #title small{display:block;color:#ffe9a8;font:12px ui-monospace,monospace;letter-spacing:0}
+</style>
+<script type="importmap">
+{"imports":{"three":"./vendor/three.bundle.js",
+"three/addons/loaders/GLTFLoader.js":"./vendor/three.bundle.js",
+"three/addons/utils/SkeletonUtils.js":"./vendor/three.bundle.js"}}
+</script>
+</head>
+<body>
+<script src="splash.js"></script>
+<div id="hud"></div>
+<div id="title">GTA: GAK TAU ATURAN<small>Suramadu City - Iterasi 0 (scaffold)</small></div>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>

@@ -8,13 +8,16 @@
 
 ## 🌴 About
 
-**GTA: Gak Tau Aturan — Suramadu City** is a personal hobby project that brings open-world chaos to a familiar corner of Indonesia.
+**GTA: Gak Tau Aturan — Suramadu City** is a personal hobby project that brings open-world chaos to a familiar corner of Indonesia. 
+
+NGL -- This Project is Fully Made using Claude.ai as the main coder, and suno.ai as the music, while the assets are downloaded from sketchfab and such (is included in credits.md)
 
 Imagine driving through Surabaya, cruising across the Suramadu Bridge, getting lost in a Madura village, stealing a vehicle, and somehow ending up chased by Satpol PP.
 
 It's a parody of the Grand Theft Auto formula, mixed with Indonesian locations, local atmosphere, and a healthy amount of nonsense.
 
 This project is made purely for fun. Development only continues when I have spare time, feel like experimenting, or suddenly get another ridiculous idea.
+Feel free to pull, modify the games, and launch your own, just don't forget to credit me.
 
 No deadlines. No promises. Just vibes.
 

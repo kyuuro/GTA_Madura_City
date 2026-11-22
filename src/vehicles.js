@@ -186,6 +186,7 @@ export async function createVehicles(scene, ctx) {
   let label = '';
 
   api.leave = leave; api.enter = enter; api.spawn = spawn; api.step = step; // dipakai npcs.js (lalu lintas AI)
+  api.nameOf = (v) => VEH_NAMES[v.type] || v.type;   // iter 90: nama tampil (panel kecepatan di radar)
   api.settle = () => { for (const v of list) if (v !== api.driving) collider.resolve(v.obj.position, v.T.r); }; // dipanggil setelah kota dibangun ulang
   api.update = (dt, ctl, player) => {
     const near = api.driving ? null : nearest(player.position);

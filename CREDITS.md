@@ -38,3 +38,6 @@ Parodi fiktif, tidak berafiliasi dengan Rockstar Games / Take-Two. "GTA" di sini
 
 - Data jalan Darmo (src/darmo_data.js) diturunkan dari data OpenStreetMap, (c) kontributor OpenStreetMap, lisensi ODbL 1.0 - https://www.openstreetmap.org/copyright . PERUBAHAN: diekspor via Overpass, dikonversi ke koordinat game 1:3, disederhanakan, dua jalur searah digabung (tools/osm_to_game.py).
 - Data jalan Darmo (Surabaya Selatan): (c) kontributor OpenStreetMap, lisensi ODbL 1.0 - https://www.openstreetmap.org/copyright - https://opendatacommons.org/licenses/odbl/1-0/ . Diambil lewat Overpass (2026-11-22), diubah ke koordinat game 1:3 (tools/osm_to_game.py -> src/darmo_data.js; garis dua-jalur digabung, jalan layang dibuang, T-junction dipasang). Hasil turunan ini dibagikan di bawah ODbL yang sama. Koridor (src/koridor_data.js) ditulis tangan, bukan dari OSM, hanya menyambung ke ujung jalan OSM.
+
+## Musik
+- **Musik latar game & splash: 4 lagu dibuat dengan Suno (https://suno.com)** - "Ini Tanah Gusti" (assets/audio/bgm_default.mp3, kota + splash), "BESI TUA" (bgm_perak.mp3, area Perak), "Mo-MONEY" (bgm_kenjeran.mp3, area Kenjeran), "Carok After Dark" (bgm_suramadu.mp3, jalur Suramadu). Lagu-lagu ini dihasilkan AI lewat Suno; kredit tampil di layar loading (splash.js). Syarat pemakaian mengikuti paket akun Suno saat lagu dibuat (cek sebelum rilis komersial).

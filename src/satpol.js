@@ -117,6 +117,7 @@ export async function createSatpol(scene, ctx) {
   }
 
   // ---------- API ----------
+  api.units = () => foot.concat(dis).filter(f => f.o.visible).map(f => f.o.position).concat(bikes.filter(u => u.v.obj.visible).map(u => u.v.obj.position));   // iter 90: posisi petugas yang tampil (blip radar)
   api.toast = toast;
   api.respawn = (player) => respawn(player);   // iter 25: dipakai health.js saat WASTED
   api.witness = (x, z, r) => foot.some(f => f.o.visible && Math.hypot(f.o.position.x - x, f.o.position.z - z) < r) || bikes.some(u => u.v.obj.visible && Math.hypot(u.v.obj.position.x - x, u.v.obj.position.z - z) < r);

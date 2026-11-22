@@ -26,6 +26,8 @@ import { createSatpol } from './satpol.js';
 import { createHealth } from './health.js';
 import { initRetro } from './retro.js';
 import { createMusic } from './music.js';
+import { createMinimap } from './minimap.js';   // iter 90: radar/minimap + peta penuh
+import { createSettings } from './settings.js';   // iter 90: menu pause (MAP / SETTINGS)
 await initRetro();   // iter 26: karakter Kenney (CC0) menggantikan makeCharacter procedural; gagal -> procedural
 import { createTraffic } from './traffic.js';
 import { createVehicleCollisions } from './vcollide.js';
@@ -34,7 +36,8 @@ import { createBengkel } from './bengkel.js';
 import { createLights } from './lights.js';
 import { createSFX } from './sfx.js';
 
-let quality = matchMedia('(pointer:coarse)').matches ? 'Low' : 'High';
+const settings = createSettings();   // iter 90: setting tersimpan (localStorage); Esc/P = menu, M = peta, N = radar besar
+let quality = settings.get('quality') || (matchMedia('(pointer:coarse)').matches ? 'Low' : 'High');
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
@@ -100,24 +103,18 @@ traffic.bind(satpol);
 crowd.onHit = (v) => { if (v === veh.driving) { sfx.thud(); satpol.report(30, 'You ran over a pedestrian!'); } };
 veh.onEnter = (v) => satpol.report(35, v.satpol ? 'You stole a Satpol PP bike!' : 'Carjacking!');
 veh.onNear = (msg) => satpol.toast(msg);   // iter 45: toast saat mendekati kendaraan (jangkauan sama dengan tombol ENTER)
-const qb = document.createElement('button');
-const BTN = 'position:fixed;right:8px;z-index:99;background:#000b;color:#ffe9a8;border:1px solid #ffe9a866;padding:6px 9px;border-radius:6px;font:12px monospace;';
-qb.style.cssText = BTN + 'top:46px';
-const setQ = (q) => { quality = q; qb.textContent = 'Quality: ' + q; buildCity(); };
-qb.textContent = 'Quality: ' + quality; qb.onclick = () => setQ({ Low: 'High', High: 'Ultra', Ultra: 'Low' }[quality]);
-document.body.appendChild(qb);
-const sb = document.createElement('button'); sb.style.cssText = BTN + 'top:228px'; sb.textContent = 'Sound: On';
-const toggleSfx = () => { sb.textContent = 'Sound: ' + (sfx.toggle() ? 'Off' : 'On'); }; sb.onclick = toggleSfx; document.body.appendChild(sb);
-addEventListener('keydown', e => { if (e.code === 'KeyM' && !e.repeat) toggleSfx(); });
-[['Spawn', 0, 12], ['Perak', -1640, -565], ['Kenjeran', 898, 1385], ['Suramadu', 340, -60]].forEach(([n, x, z], i) => { // teleport untuk tes
-  const b = document.createElement('button'); b.textContent = '>> ' + n; b.style.cssText = BTN + 'top:' + (84 + i * 36) + 'px';
-  b.onclick = () => { player.position.set(x, 0, z); camera.position.set(x, 6, z + 8); }; document.body.appendChild(b); });
-[['Darmo', -1130, 2800], ['Koridor', -740, 1640]].forEach(([n, x, z], i) => { // iter 86: teleport Darmo (dekat Taman Bungkul, Jl. Raya Darmo); iter 87: Koridor (di Jl. Raya Darmo Lanjutan, ~(-740,1640))
-  const b = document.createElement('button'); b.textContent = '>> ' + n; b.style.cssText = BTN + 'top:' + (336 + i * 36) + 'px';
-  b.onclick = () => { if (koridor) koridor.flush(x, z); if (darmoB) darmoB.flush(x, z); player.position.set(x, 0, z); camera.position.set(x, 6, z + 8); }; document.body.appendChild(b); });   // iter 88: flush = bangun chunk koridor di tujuan SEBELUM pindah
-[['Pylon', 340, -1010], ['Madura', 340, -1985]].forEach(([n, x, z], i) => { // iter 52: teleport jembatan panjang (1:3)
-  const b = document.createElement('button'); b.textContent = '>> ' + n; b.style.cssText = BTN + 'top:' + (264 + i * 36) + 'px';
-  b.onclick = () => { player.position.set(x, 0, z); camera.position.set(x, 6, z + 8); }; document.body.appendChild(b); });
+// iter 90: tombol layar Quality/Sound/teleport dipindah ke menu setting (settings.js); kualitas, suara, kecepatan waktu & teleport diatur dari sana
+const setQ = (q) => { if (q === quality) return; quality = q; settings.set('quality', q); buildCity(); };
+const tp = (x, z) => { if (veh.driving) veh.leave(player); if (koridor) koridor.flush(x, z); if (darmoB) darmoB.flush(x, z); player.position.set(x, 0, z); camera.position.set(x, 6, z + 8); };   // iter 88: flush = bangun chunk koridor/Darmo di tujuan SEBELUM pindah
+settings.setTeleports([['Spawn', 0, 12], ['Perak', -1640, -565], ['Kenjeran', 898, 1385], ['Suramadu', 340, -60], ['Pylon', 340, -1010], ['Madura', 340, -1985], ['Darmo', -1130, 2800], ['Koridor', -740, 1640]].map(([n, x, z]) => [n, () => { settings.close(); tp(x, z); }]));
+settings.on((k, val) => {
+  if (k === 'quality') { if (val !== quality) setQ(val); }
+  else if (k === 'timeScale') world.setSpeed(val);
+  else if (k === 'music') music.setVolume(val / 100);
+  else if (k === 'sfx') sfx.setVolume(val / 100);
+  else if (k === 'mute') { sfx.setMuted(val); music.setMuted(val); }
+});
+music.setVolume(settings.get('music') / 100); sfx.setVolume(settings.get('sfx') / 100);
 
 // Player: assets/player.glb kalau ada, kalau tidak -> karakter procedural
 const player = await loadModel('player', () => makeCharacter({ hat: 'none', shirt: 0xd9423a, skin: SKINS[1], player: true }));
@@ -133,7 +130,7 @@ const npcs = [
 // Input
 const ctl = createControls();
 addEventListener('keydown', e => {
-  if (e.code === 'KeyT') world.setSpeed(world.speed === 1 ? 30 : 1);
+  if (e.code === 'KeyT') settings.set('timeScale', world.speed === 1 ? 30 : 1);
   const map = { Digit1: 'Low', Digit2: 'High', Digit3: 'Ultra' };
   if (map[e.code] && map[e.code] !== quality) setQ(map[e.code]);
 });
@@ -144,7 +141,13 @@ addEventListener('resize', () => {
 
 let swimming = false;
 const inWater = (x, z) => bridge.heightAt(x, z) == null && world.height(x, z) < -0.15;
-const hud = createHUD(renderer, () => quality, () => `Time      : ${world.clock()}  (T = time x30)` + (veh.driving ? `\nSpeed     : ${Math.round(veh.speed)} km/h  (RUN = turbo)  HP ${Math.round(veh.driving.hp ?? 100)}%` : '') + (swimming ? '\nSwimming  : yes (Satpol cannot follow)' : '') + (weapons.held ? `\nWeapon    : ${weapons.stats().name} (${weapons.uses} hits left)  G = drop` : '') + `\nWanted    : ${'*'.repeat(satpol.stars) || '-'}   Fines: Rp ${satpol.fines.toLocaleString('en-US')}`);
+const mm = createMinimap({ scene, height: world.height, roads, ground, night: world.nightU, settings, toast: (m) => satpol.toast(m),
+  getBlips: () => { const b = bengkel.shops.map(q => ({ x: q.x, z: q.z, t: 'shop' })); if (satpol.stars > 0) for (const p of satpol.units()) b.push({ x: p.x, z: p.z, t: 'cop' }); return b; } });   // iter 90: radar
+settings.attach({ mm, toast: (m) => satpol.toast(m), teleport: tp });
+window.__ui = { veh, player, mm, settings, satpol, camera };   // debug (harness)
+const hud = createHUD(renderer, { settings, mm, getQuality: () => quality,
+  getDebugExtra: () => `Time      : ${world.clock()}  (T = x${world.speed})\nPos       : ${Math.round(player.position.x)}, ${Math.round(player.position.z)}` + (veh.driving ? `\nSpeed     : ${Math.round(veh.speed)} km/h  HP ${Math.round(veh.driving.hp ?? 100)}%` : '') + `\nWanted    : ${'*'.repeat(satpol.stars) || '-'}`,
+  getStatus: () => ({ clock: world.clock(), fines: satpol.fines, weapon: weapons.held ? `${weapons.stats().name} (${weapons.uses})  [G] drop` : '', swimming }) });   // iter 90: debug hanya kalau setting ON
 const clock = new THREE.Clock();
 const dir = new THREE.Vector3(), camTarget = new THREE.Vector3(), UP = new THREE.Vector3(0, 1, 0);
 
@@ -155,6 +158,7 @@ const fight = createFight({ player, crowd, sfx, satpol, traffic, impact, weapons
 let camYaw = 0, moveSpeed = 0, T = 0, footHitCd = 0;
 function tick() {
   let dt = Math.min(clock.getDelta(), 0.05);
+  if (settings.paused) { settings.update(dt); requestAnimationFrame(tick); return; }   // iter 90: menu pause terbuka -> game dijeda (tidak digambar ulang)
   if (fight.hitstop > 0) { fight.hitstop -= dt; dt *= 0.06; }   // iter 74: hit-stop (jeda singkat saat pukulan kena)
   ctl.update(dt); camYaw = ctl.yaw;
   if (blastStun > 0) blastStun -= dt;
@@ -226,6 +230,7 @@ function tick() {
   camera.lookAt(player.position.x, player.position.y + 1.4, player.position.z);
   renderer.render(scene, camera);
   camera.position.x -= sx; camera.position.y -= sy; camera.position.z -= sz;
+  mm.update(dt, { x: player.position.x, z: player.position.z, yaw: camYaw, heading: veh.driving ? veh.driving.h : player.rotation.y, kmh: veh.driving ? Math.abs(veh.speed) : 0, driving: !!veh.driving, vehName: veh.driving ? veh.nameOf(veh.driving) : '', vhp: veh.driving ? (veh.driving.hp ?? 100) : 100 });   // iter 90
   hud();
   window.__gameStarted = true; // dipakai watchdog test.html
   requestAnimationFrame(tick);

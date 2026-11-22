@@ -1,5 +1,8 @@
-PLACEHOLDER MUSIK SPLASH
-Taruh file mp3 di sini dengan nama: splash.mp3
-(nama/path bisa diubah di splash.js -> SPLASH.music).
-Tanpa file ini game tetap jalan, hanya tanpa musik (ada log di console).
-Musik mulai setelah pemain mengetuk/menekan tombol pertama kali (aturan autoplay browser).
+MUSIK (dibuat dengan Suno - https://suno.com , file asal: usesuno.com)
+Lagu per area (dipetakan di src/music.js, tabel MUSIC):
+  bgm_default.mp3   <- "Ini Tanah Gusti"   (kota umum + layar splash)
+  bgm_perak.mp3     <- "BESI TUA"          (area Tanjung Perak)
+  bgm_kenjeran.mp3  <- "Mo-MONEY"          (area Kenjeran)
+  bgm_suramadu.mp3  <- "Carok After Dark"  (jalur Jembatan Suramadu)
+Ganti lagu: timpa mp3-nya (nama tetap) atau ubah path di src/music.js dan splash.js (SPLASH.music).
+Kredit: lihat CREDITS.md. Cek syarat lisensi Suno (paket akun saat generate) sebelum rilis komersial.

@@ -3,12 +3,12 @@
 // Semua aman kalau audio tidak tersedia (try/catch), jadi aman di node/tes.
 export function createSFX() {
   let ac = null, master = null, noise = null, sirenOsc = null, sirenGain = null, lastCrash = 0;
-  const api = { muted: false };
+  const api = { muted: false, vol: 1 };
   const ctx = () => {
     if (ac === false) return null;
     if (!ac) {
       try {
-        ac = new (window.AudioContext || window.webkitAudioContext)(); master = ac.createGain(); master.gain.value = api.muted ? 0 : 0.9; master.connect(ac.destination);
+        ac = new (window.AudioContext || window.webkitAudioContext)(); master = ac.createGain(); master.gain.value = api.muted ? 0 : 0.9 * api.vol; master.connect(ac.destination);
         noise = ac.createBuffer(1, ac.sampleRate, ac.sampleRate); const d = noise.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
       } catch (e) { ac = false; return null; }
     }
@@ -64,6 +64,8 @@ export function createSFX() {
       sirenGain.gain.setTargetAtTime(level * 0.05, ac.currentTime, 0.15);
     } catch (e) { /* */ }
   };
-  api.toggle = () => { api.muted = !api.muted; if (master) master.gain.value = api.muted ? 0 : 0.9; return api.muted; };
+  api.toggle = () => { api.muted = !api.muted; if (master) master.gain.value = api.muted ? 0 : 0.9 * api.vol; return api.muted; };
+  api.setMuted = (b) => { api.muted = !!b; if (master) master.gain.value = api.muted ? 0 : 0.9 * api.vol; };
+  api.setVolume = (f) => { api.vol = f; if (master && !api.muted) master.gain.value = 0.9 * f; };   // iter 90: slider volume efek (1 = bawaan)
   return api;
 }

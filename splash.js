@@ -1,17 +1,17 @@
 /* SPLASH LOADING ala GTA. Skrip KLASIK (bukan module) supaya muncul langsung, sebelum three.js (CDN) selesai diunduh.
-   Gambar baru: taruh di assets/ lalu tambahkan path-nya ke SPLASH.images. Musik: SPLASH.music (sekarang assets/audio/bgm.mp3, sama dgn musik game; diserahkan ke src/music.js saat splash selesai). */
+   Gambar baru: taruh di assets/ lalu tambahkan path-nya ke SPLASH.images. Musik: SPLASH.music (sekarang assets/audio/bgm_default.mp3 = lagu area default di music.js; diserahkan ke src/music.js saat splash selesai). */
 (function () {
   var SPLASH = {
     images: ['assets/splash0.jpg', 'assets/splash1.jpg', 'assets/splash2.jpg', 'assets/splash3.jpg', 'assets/splash4.jpg'],   // <- tambah gambar lain di sini
     intro: { image: 'assets/intro.jpg', fadeInMs: 800, holdMs: 2200, fadeOutMs: 1100 },   // iter 44: gambar pembuka (VI) sebelum layar loading; tap/tombol = lewati. image: null = tanpa intro
-    music: 'assets/audio/bgm.mp3',                         // lagu sementara (sama dengan musik game, lihat src/music.js)
+    music: 'assets/audio/bgm_default.mp3',                 // lagu Suno "Ini Tanah Gusti" = lagu area default di src/music.js (path sama -> lanjut tanpa putus)
     musicVolume: 0.7,
     musicFadeMs: 2500,
     slideMs: 5200,      // ganti gambar tiap sekian ms
     minMs: 4500,        // splash minimal tampil sekian ms walau game sudah siap
     warnMs: 15000,      // lewat ini dianggap macet
     sub: 'SURAMADU CITY',
-    credit: 'Police model: &ldquo;Indonesian Police Dalmas&rdquo; by mixboni (skfb.ly/pDCwr) &middot; CC BY 4.0 (creativecommons.org/licenses/by/4.0) &middot; modified: simplified, rigged &amp; retextured. Road texture: &ldquo;Low road&rdquo; by Yarelon &middot; Sidewalk texture: &ldquo;Sidewalks&rdquo; by Caboose3d &middot; Grass: &ldquo;Simple grass chunks&rdquo; by 3dhdscan. Houses: &ldquo;Old house with rusty roof 3d model free&rdquo; by iGauravRajput &amp; &ldquo;[old] Indonesian Simple House&rdquo; by sakit.jawa &amp; &ldquo;Abadoned Building | Lowpoly&rdquo; by Frid.blend (all downloaded from Sketchfab, CC BY 4.0, modified). Trees: &ldquo;Tree Animate&rdquo; by RandyGF (Sketchfab, CC BY 4.0, modified: 3 variants simplified &amp; retextured). Minimarket: &ldquo;minimarket - indomaret&rdquo; by Pojan (Sketchfab, CC BY 4.0, modified: simplified, vertex-coloured; unaffiliated with Indomaret). Full credits: CREDITS.md',   // iter 56: atribusi CC BY (wajib)
+    credit: 'Police model: &ldquo;Indonesian Police Dalmas&rdquo; by mixboni (skfb.ly/pDCwr) &middot; CC BY 4.0 (creativecommons.org/licenses/by/4.0) &middot; modified: simplified, rigged &amp; retextured. Road texture: &ldquo;Low road&rdquo; by Yarelon &middot; Sidewalk texture: &ldquo;Sidewalks&rdquo; by Caboose3d &middot; Grass: &ldquo;Simple grass chunks&rdquo; by 3dhdscan. Houses: &ldquo;Old house with rusty roof 3d model free&rdquo; by iGauravRajput &amp; &ldquo;[old] Indonesian Simple House&rdquo; by sakit.jawa &amp; &ldquo;Abadoned Building | Lowpoly&rdquo; by Frid.blend (all downloaded from Sketchfab, CC BY 4.0, modified). Trees: &ldquo;Tree Animate&rdquo; by RandyGF (Sketchfab, CC BY 4.0, modified: 3 variants simplified &amp; retextured). Minimarket: &ldquo;minimarket - indomaret&rdquo; by Pojan (Sketchfab, CC BY 4.0, modified: simplified, vertex-coloured; unaffiliated with Indomaret). Music: &ldquo;Ini Tanah Gusti&rdquo;, &ldquo;BESI TUA&rdquo;, &ldquo;Mo-MONEY&rdquo; &amp; &ldquo;Carok After Dark&rdquo; &mdash; created with Suno (suno.com). Full credits: CREDITS.md',   // iter 56: atribusi CC BY (wajib)
     tips: [
       'Red lights are just suggestions.',
       'Helmets are accessories, not requirements.',

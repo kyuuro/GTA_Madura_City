@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script type="importmap">{"imports":{"three":"/vendor/three.bundle.js","three/addons/loaders/GLTFLoader.js":"/vendor/three.bundle.js","three/addons/utils/SkeletonUtils.js":"/vendor/three.bundle.js"}}</script></head><body>
+<script type="module">
+import * as THREE from 'three';
+import { loadModel } from '/src/assets.js';
+const q=new URLSearchParams(location.search); const name=q.get('m')||'truck';
+const obj=await loadModel(name,()=>new THREE.Group()); const scene=new THREE.Scene(); scene.background=new THREE.Color(0x667788);
+scene.add(new THREE.HemisphereLight(0xffffff,0x444444,1.8)); const dl=new THREE.DirectionalLight(0xffffff,1.2); dl.position.set(3,6,4); scene.add(dl); scene.add(obj);
+const g=new THREE.Mesh(new THREE.PlaneGeometry(30,30),new THREE.MeshStandardMaterial({color:0x444444})); g.rotation.x=-Math.PI/2; scene.add(g);
+const ws=[]; obj.traverse(o=>{if(/^wheel/.test(o.name))ws.push(o)});
+const angs=[0,0.9,1.9,3.1,4.4]; const W=520,H=380; const r=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true}); r.setSize(W*angs.length,H); document.body.appendChild(r.domElement); r.setScissorTest(true);
+const cam=new THREE.PerspectiveCamera(30,W/H,0.1,80); cam.position.set(11,2.6,0); cam.lookAt(0,1.3,0);
+angs.forEach((a,i)=>{ ws.forEach(w=>w.rotation.x=a); r.setViewport(i*W,0,W,H); r.setScissor(i*W,0,W,H); r.render(scene,cam); });
+window.__done=true;
+</script></body></html>

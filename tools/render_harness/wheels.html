@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script type="importmap">{"imports":{"three":"/vendor/three.bundle.js","three/addons/loaders/GLTFLoader.js":"/vendor/three.bundle.js","three/addons/utils/SkeletonUtils.js":"/vendor/three.bundle.js"}}</script></head><body>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { MODEL_CFG, fitModel } from '/src/assets.js';
+const out={}; const names=Object.keys(MODEL_CFG);
+for(const n of names){ const cfg=MODEL_CFG[n]; if(!cfg.file||cfg.height) continue;
+  try{ const g=await new GLTFLoader().loadAsync('/assets/'+cfg.file+'.glb'); const raw=[]; g.scene.traverse(o=>{ if(/wheel|tire|tyre|roda/i.test(o.name)) raw.push(o.name)});
+    const h=fitModel(g.scene,n); h.updateMatrixWorld(true); const rows=[];
+    h.children.forEach(p=>{ if(/^wheel/.test(p.name)){ const members=[]; p.children.forEach(c=>{ const b=new THREE.Box3().setFromObject(c); const ct=b.getCenter(new THREE.Vector3()); const s=b.getSize(new THREE.Vector3()); members.push([+(ct.x-p.position.x).toFixed(2),+(ct.y-p.position.y).toFixed(2),+(ct.z-p.position.z).toFixed(2),+s.x.toFixed(2),+s.y.toFixed(2),+s.z.toFixed(2)]); }); rows.push({pivot:p.name,pos:p.position.toArray().map(v=>+v.toFixed(2)),n:members.length,members}); }});
+    out[n]={rawNames:raw.length,rows};
+  }catch(e){ out[n]={err:String(e)} } }
+window.__out=out; window.__done=true;
+</script></body></html>

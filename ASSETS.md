@@ -22,7 +22,7 @@ Legenda: ✅ = file sudah ada di assets/ (sudah dimasukkan) · ⬜ = BELUM ada /
 | Varian rumah kampung (Sketchfab, CC BY 4.0): rusty.glb "Old house with rusty roof" iGauravRajput, indo.glb "[old] Indonesian Simple House" sakit.jawa, abandoned.glb "Abadoned Building | Lowpoly" Frid.blend | ✅🔌 | assets/kenney/rumah/ (3 rb & 268 segitiga), dipakai buildings.js `KH_VAR` (iter 63). Diunduh dari Sketchfab; WAJIB kredit (CREDITS.md, splash.js) |
 | Kenney Retro Urban Kit (115 model: tembok, atap seng, pintu, jendela, truk, pohon, lampu, kabel, jalan tanah) | ✅ (2 🔌: wall-a-door, roof-metal-type-a di warung kampung) | assets/kenney/retro-urban/ - ada, belum disambung. Colormap BERBEDA (Textures/*.png banyak file) - jangan dicampur folder |
 | Pagoda / patung Kenjeran, perahu nelayan, warung | ⬜ | Masih procedural |
-| Musik splash + game (assets/audio/bgm.mp3) | ✅🔌 | Lagu sementara (berhak cipta, ganti sebelum rilis publik). Dipakai splash.js (SPLASH.music) lalu diserahkan ke src/music.js (iter 33) |
+| Musik splash + game (assets/audio/bgm_*.mp3) | ✅🔌 | 4 lagu buatan Suno (default/perak/kenjeran/suramadu), dipetakan di src/music.js; lagu default juga dipakai splash.js. Kredit Suno di CREDITS.md + splash.js |
 | Efek suara asli (klakson, mesin, siren) | ⬜ | Masih WebAudio sintetis (sfx.js) |
 | Tekstur aspal/tembok (ambientcg), HDRI langit (polyhaven) | ⬜ | Belum diambil |
 | Splash gambar (splash0-2.jpg) | ✅ | assets/splash*.jpg |
